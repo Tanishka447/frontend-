@@ -1,0 +1,48 @@
+.dashboard-page {
+  max-width: 800px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap; /* Allow columns to wrap to next line if needed */
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9; /* Light gray background */
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.dashboard-column {
+  text-align: center;
+  margin: 10px;
+  padding: 20px;
+  background-color: #fff; /* White background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.dashboard-column h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333; /* Dark text color */
+}
+
+.dashboard-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333; /* Dark text color */
+}
+
+/* Media query for responsive design */
+@media (max-width: 600px) {
+  .dashboard-page {
+    padding: 10px;
+  }
+  
+  .dashboard-column {
+    flex-basis: 100%; /* Full width on small screens */
+    margin: 5px 0;
+  }
+}
+
+  

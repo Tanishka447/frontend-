@@ -1,0 +1,66 @@
+.reports-page {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: 'Arial', sans-serif;
+}
+
+h1, h2 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.report-section {
+  margin-bottom: 40px;
+}
+
+.report-option, .date-range {
+  margin-bottom: 20px;
+}
+
+select, input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.generate-report-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: linear-gradient(45deg, #6a11cb, #2575fc); /* Gradient background */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.generate-report-button:hover {
+  background: linear-gradient(45deg, #2575fc, #6a11cb); /* Inverted gradient on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.generate-report-button:active {
+  background: #1d3f6e; /* Darker background on click */
+  transform: scale(1); /* Remove zoom effect */
+}
+
+.date-range input[type="date"] {
+  width: calc(50% - 10px); /* Adjust width for side-by-side placement */
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.date-range input[type="date"]:last-of-type {
+  margin-right: 0;
+}
+

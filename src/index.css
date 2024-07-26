@@ -1,0 +1,104 @@
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
+nav{
+  display: flex;
+  gap: 34px;
+  background-color: black;
+  color: white;
+}
+
+li{
+  list-style: none;
+  padding: 23px;
+}
+
+a li {
+  color: white;
+}
+
+ll{
+  color:aquamarine;
+  background-color: purple;
+  margin-left: 1400px;
+  height: 100px;
+  /* left: 500%; */
+  /* padding: 200px; */
+}
+*{
+  padding: 0;
+  margin: 0;
+  /* background-color: ; */
+}
+
+.red{
+  background-color: rgb(117, 44, 44);
+  color: white
+}
+.home-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.options ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  /* justify-content: center; */
+}
+
+.options li {
+  margin: 0 10px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #f0f0f0;
+}
+
+.button {
+  position: absolute; /* Use fixed positioning to keep the button in place even when scrolling */
+  top: 20px; /* Adjust top position as needed */
+  right: 2000px; /* Adjust right position as needed */
+  z-index: 1000;
+}
+
+.user-button button {
+  border: none;
+  background-color: #007bff;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Make it circular */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
