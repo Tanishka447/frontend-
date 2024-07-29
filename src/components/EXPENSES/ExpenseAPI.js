@@ -2,22 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './ExpenseAPI.css';
 
 const ExpenseAPI = () => {
-  // State for managing expenses and form data
   const [expenses, setExpenses] = useState([]);
   const [form, setForm] = useState({ category: '', amount: '', date: '', notes: '' });
   const [editIndex, setEditIndex] = useState(null);
 
   useEffect(() => {
-    // Initial load of expenses from API or local storage
     fetchExpenses();
   }, []);
 
   const fetchExpenses = async () => {
-    // Replace with your API call to fetch expenses
-    // const response = await axios.get('/api/expenses');
-    // setExpenses(response.data);
-    
-    // For demonstration, using static data
     setExpenses([
       { category: 'Food', amount: 50, date: '2024-07-20', notes: 'Groceries' },
       { category: 'Transport', amount: 30, date: '2024-07-21', notes: 'Bus fare' },
@@ -32,14 +25,12 @@ const ExpenseAPI = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editIndex !== null) {
-      // Update expense
       const updatedExpenses = expenses.map((expense, index) =>
         index === editIndex ? form : expense
       );
       setExpenses(updatedExpenses);
       setEditIndex(null);
     } else {
-      // Add new expense
       setExpenses([...expenses, form]);
     }
     setForm({ category: '', amount: '', date: '', notes: '' });

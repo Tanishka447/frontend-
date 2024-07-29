@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './login.css'; // Ensure to import your CSS file
-// import axios from 'axios';
+import './login.css'; 
 import { loginUser } from './authAPI';
 
 const LoginForm = () => {
