@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+// import {useAuth} from './useAuth';
 import './login.css'; 
-import { loginUser } from './authAPI';
 
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await loginUser(
+      const response = await axios.post("http://localhost:9001/login",{
         email,
         password,
-      );
+    });
       const { data } = response;
+      // login(data.token);
       console.log('Login Response:', data);
+      // localStorage.setItem('token', data.token);
 
       setMessage('Login successful!');
+      navigate('/home');
     } catch (error) {
       console.error('Error logging in:', error);
       setMessage('Login failed. Please check your credentials and try again.');

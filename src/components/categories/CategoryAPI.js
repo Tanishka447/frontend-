@@ -1,155 +1,110 @@
-import React, { useState, useEffect } from 'react';
+import './Categories.css';
+import React, { useState } from 'react';
 import axios from 'axios';
-import './Categories.css'; 
+// import { getToken } from '../auth/useAuth';
 
-const CategoryAPI = () => {
+function CategoryAPI() {
+  const data = { name: "", budget: "" };
+  const [inputData, setInputData] = useState(data);
+  const [categoryId, setCategoryId] = useState(""); 
+  const [fetchedCategory, setFetchedCategory] = useState(data); 
 
-  const [categories, setCategories] = useState([]);
-  const [totalCategories, setTotalCategories] = useState(0);
-  
- 
-  const [categoryForm, setCategoryForm] = useState({
-    name: '',
-    amount: '',
-    notes: '',
-  });
-  
-  const [editCategory, setEditCategory] = useState(null);
-  
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAzLCJpYXQiOjE3MjI1OTYzNjIsImV4cCI6MTczOTg3NjM2Mn0.LDlhw01AGqL6vxCaoPlHQIyQxDB8IVglzugdOq2PffA';
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get('http://localhost:9001/categories');
-      setCategories(response.data);
-      setTotalCategories(response.data.length);
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    }
+  const handleData = (e) => {
+    setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
-  const handleAddOrUpdateCategory = async () => {
-    if (editCategory) {
-      
-      try {
-        await axios.put(`http://localhost:9001/categories/${editCategory.id}`, categoryForm);
-        console.log('Category updated successfully');
-        setEditCategory(null); 
-      } catch (error) {
-        console.error('Error updating category:', error);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios.post("http://localhost:9001/addcategory", inputData, {
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json' 
       }
-    } else {
-   
-      try {
-        await axios.post('http://localhost:9001/categories', categoryForm);
-        console.log('Category added successfully');
-      } catch (error) {
-        console.error('Error adding category:', error);
-      }
-    }
-    fetchCategories(); 
-    setCategoryForm({ name: '', amount: '', notes: '' }); 
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCategoryForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
-  };
-
-  
-  const handleEditClick = (category) => {
-    setEditCategory(category);
-    setCategoryForm({
-      name: category.name,
-      amount: category.amount,
-      notes: category.notes,
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error('There was an error!', error);
     });
   };
 
-  // Delete a category
-  const handleDeleteClick = async (id) => {
-    try {
-      await axios.delete(`http://localhost:9001/categories/${id}`);
-      console.log('Category deleted successfully');
-      fetchCategories(); 
-    } catch (error) {
-      console.error('Error deleting category:', error);
-    }
+  // const handleUpdate =(e) =>{
+  //   e.preventDefault();
+  //   const token = ''; 
+
+  //   axios.put("http://localhost:9001/updatecategory/1" ,inputData , {
+  //     headers: {
+  //       'Authorization': `Bearer ${token}`, 
+  //       'Content-Type': 'application/json' 
+  //     }
+  //   })
+
+  //   .then((response)=>{
+  //     console.log(response)
+  //   })
+  // }
+
+  const handleDelete =(e) =>{
+    e.preventDefault();
+    axios.delete("http://localhost:9001/deletecat/1" ,{
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json' 
+      }
+    })
+    .then((response) =>{
+      console.log(response)
+    });
+  }
+
+  const handleFetch = (e) => {
+    e.preventDefault();
+
+    axios.get(`http://localhost:9001/categories/${categoryId}`, {
+      headers: {
+        'Authorization': `Bearer ${token()}`
+      }
+    })
+    .then((response) => {
+      setFetchedCategory(response.data);
+    })
+    .catch((error) => {
+      console.error('There was an error!', error);
+    });
   };
+
   return (
-    <div className="categories-page">
-      <h1>Categories</h1>
-      <div className="total-categories">Total Categories: {totalCategories}</div>
-      
-      <div className="categories-list">
-        <div className="category-header">
-          <div className="header-item">Name</div>
-          <div className="header-item">Amount</div>
-          <div className="header-item">Notes</div>
-          <div className="header-item">Actions</div>
-        </div>
-        {categories.map((category) => (
-          <div className="category-row" key={category.id}>
-            <div className="row-item">{category.name}</div>
-            <div className="row-item">${category.amount}</div>
-            <div className="row-item">{category.notes}</div>
-            <div className="row-item">
-              <button onClick={() => handleEditClick(category)}>Edit</button>
-              <button onClick={() => handleDeleteClick(category.id)}>Delete</button>
-            </div>
-          </div>
-        ))}
+    <>
+      <label>Name: </label>
+      <input type="text" name='name' value={inputData.name} onChange={handleData} /><br />
+
+      <label>Budget: </label>
+      <input type="number" name='budget' value={inputData.budget} onChange={handleData} /><br />
+      <button onClick={handleSubmit}>submit</button>
+      {/* <button onClick={handleUpdate}>Update</button> */}
+      <button onClick={handleDelete}>Delete</button>
+      <br /><br />
+      <label>Category ID to Fetch: </label>
+      <input 
+        type="text" 
+        value={categoryId} 
+        onChange={(e) => setCategoryId(e.target.value)} 
+      /><br />
+      <button onClick={handleFetch}>Fetch Category</button>
+
+      <div>
+        <h3>Fetched Category Data:</h3>
+        <p>Name: {fetchedCategory.name}</p>
+        <p>Budget: {fetchedCategory.budget}</p>
       </div>
-      
-      <div className="add-category-form">
-        <h2>{editCategory ? 'Edit Category' : 'Add Category'}</h2>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={categoryForm.name}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          type="number"
-          name="amount"
-          placeholder="Amount"
-          value={categoryForm.amount}
-          onChange={handleInputChange}
-          required
-        />
-        <textarea
-          name="notes"
-          placeholder="Notes"
-          value={categoryForm.notes}
-          onChange={handleInputChange}
-          required
-        />
-        <button className="add-category-button" onClick={handleAddOrUpdateCategory}>
-          {editCategory ? 'Update Category' : 'Add Category'}
-        </button>
-        {editCategory && (
-          <button
-            className="cancel-button"
-            onClick={() => {
-              setEditCategory(null);
-              setCategoryForm({ name: '', amount: '', notes: '' });
-            }}
-          >
-            Cancel
-          </button>
-        )}
-      </div>
-    </div>
+    </>
   );
-};
+}
 
 export default CategoryAPI;
+
+

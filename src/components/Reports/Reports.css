@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 40px auto;
   padding: 30px;
-  background-color: #f9f9f9;
+  background-color: rgb(238, 215, 187);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   font-family: 'Arial', sans-serif;
@@ -29,33 +29,33 @@ select, input[type="date"] {
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 1rem;
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
+  box-sizing: border-box; 
 }
 
 .generate-report-button {
   margin-top: 20px;
   padding: 12px 24px;
-  background: linear-gradient(45deg, #6a11cb, #2575fc); /* Gradient background */
-  color: white;
+  background: linear-gradient(45deg, #6a11cb, #2575fc); 
+  color: bisque;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  transition: background 0.3s ease, transform 0.3s ease; 
 }
 
 .generate-report-button:hover {
-  background: linear-gradient(45deg, #2575fc, #6a11cb); /* Inverted gradient on hover */
-  transform: scale(1.05); /* Slight zoom effect */
+  background: linear-gradient(45deg, #2575fc, #6a11cb); 
+  transform: scale(1.05); 
 }
 
 .generate-report-button:active {
-  background: #1d3f6e; /* Darker background on click */
-  transform: scale(1); /* Remove zoom effect */
+  background: #1d3f6e; 
+  transform: scale(1); 
 }
 
 .date-range input[type="date"] {
-  width: calc(50% - 10px); /* Adjust width for side-by-side placement */
+  width: calc(50% - 10px); 
   display: inline-block;
   margin-right: 20px;
 }

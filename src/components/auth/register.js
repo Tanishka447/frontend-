@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import{Link} from 'react-router-dom';
 import './register.css';
 import { registerUser } from './authAPI';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
   const [name,setName]=useState('');
   const[email , setEmail] = useState('');
   const[password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+
+  const navigate = useNavigate();
   
   const handleRegister= async(e)=>{
     e.preventDefault()
@@ -22,6 +25,7 @@ const {data}= response ;
 console.log('Registration Response: ', data);
 
 setMessage('Registration successful!');
+navigate('/register/success');
     } catch (error) {
       console.error('Error registering user:', error);
       setMessage('Registration failed. Please try again.');
